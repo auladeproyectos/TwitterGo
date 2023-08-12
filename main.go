@@ -5,6 +5,8 @@ import (
 	"os"
 
 	"github.com/Auladeproyectos/TwitterGo/awsgo"
+	"github.com/Auladeproyectos/TwitterGo/models"
+	"github.com/Auladeproyectos/TwitterGo/secretmanager"
 	"github.com/aws/aws-lambda-go/events"
 	lambda "github.com/aws/aws-lambda-go/lambda"
 )
@@ -28,6 +30,19 @@ func EjecutarLambda(ctx context.Context, request events.APIGatewayProxyRequest) 
 		}
 		return res, nil
 	}
+	SecretModel, err := secretmanager.GetSecret(os.Getenv("SecretName"))
+	if err != nil {
+		res = &events.APIGatewayProxyResponse{
+			StatusCode: 400,
+			Body:       "Error en la Lectura de secret " + err.Error(),
+			Headers: map[string]string{
+				"Content-Type": "application/json",
+			},
+		}
+		return res, nil
+	}
+
+	awsgo.Ctx = context.WithValue(awsgo.Ctx, models.Key("method"), request.HTTPMethod)
 
 }
 
