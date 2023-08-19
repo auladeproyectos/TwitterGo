@@ -15,10 +15,10 @@ import (
 )
 
 func main() {
-	lambda.Start(EjecutarLambda())
+	lambda.Start(EjecutoLambda)
 }
 
-func EjecutarLambda(ctx context.Context, request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
+func EjecutoLambda(ctx context.Context, request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
 	var res *events.APIGatewayProxyResponse
 
 	awsgo.InicializoAWS()

@@ -6,6 +6,7 @@ import (
 
 	"github.com/Auladeproyectos/TwitterGo/jwt"
 	"github.com/Auladeproyectos/TwitterGo/models"
+	"github.com/Auladeproyectos/TwitterGo/routers"
 	"github.com/aws/aws-lambda-go/events"
 )
 
